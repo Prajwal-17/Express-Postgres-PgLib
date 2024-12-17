@@ -1,0 +1,18 @@
+# Ignore node_modules - Dependencies will be installed in the container
+node_modules/
+
+# Ignore logs - Not needed in the image
+*.log
+
+# Ignore environment files - Sensitive credentials should not be in the image
+.env
+.env.local
+.env.*.local
+
+# Ignore Git files - Not required for the image
+.git
+.gitignore
+
+# Ignore Docker-related files - Prevent infinite inclusion
+.dockerignore
+docker-compose.yml
