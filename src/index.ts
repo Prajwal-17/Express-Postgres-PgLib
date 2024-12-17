@@ -4,10 +4,21 @@ import express from "express"
 const app = express();
 app.use(express.json())
 
-// CONNECTION STRING => postgresql://TestApp_owner:<password>@ep-curly-hall-a5baqzxx.us-east-2.aws.neon.tech/TestApp?sslmode=require
-const pgClient = new Client("postgresql://TestApp_owner:F4y8qHXfQpVO@ep-curly-hall-a5baqzxx.us-east-2.aws.neon.tech/TestApp?sslmode=require");
+//online dB
+// const pgClient = new Client("postgresql://TestApp_owner:F4y8qHXfQpVO@ep-curly-hall-a5baqzxx.us-east-2.aws.neon.tech/TestApp?sslmode=require");
 
-pgClient.connect();
+//local dB
+const pgClient = new Client({
+  user: "postgres",
+  password: "qwerty",
+  host: "postgres",
+  port: 5432,
+  database: "dockerDB",
+});
+
+pgClient.connect()
+  .then(() => console.log("Connected to PostgreSQL!"))
+  .catch((err) => console.error("Connection error", err.stack));
 
 app.get("/users/:id", async (req, res) => {
 
